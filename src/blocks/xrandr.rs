@@ -120,10 +120,7 @@ impl Xrandr {
                                  .floor() as u32;
                 }
             }
-            if let Some(mut res) = mi_line_args.get(2) {
-                if res.find('+').is_none() {
-                    res = unwrap_or_continue!(mi_line_args.get(3));
-                }
+            if let Some(res) = mi_line_args.get(2) {
                 if let Some(resolution) = res.split('+')
                                              .collect::<Vec<&str>>()
                                              .get(0) {
@@ -185,7 +182,7 @@ impl Block for Xrandr
         vec![&self.text]
     }
 
-    fn click(&mut self, e: &I3barEvent) {
+    fn click_left(&mut self, e: &I3barEvent) {
         if let Some(ref name) = e.name {
             if name.as_str() == self.id {
                 if self.current_idx < self.monitors.len() - 1 {
